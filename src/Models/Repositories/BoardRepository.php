@@ -21,7 +21,7 @@ class BoardRepository extends Repository
 
     /**
      * @param String $host_type
-     * @param Int    $host_id
+     * @param String $host_id
      * @param String $code
      * @param Array  $data
      * @param Int    $page

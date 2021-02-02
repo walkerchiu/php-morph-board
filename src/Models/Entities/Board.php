@@ -2,10 +2,10 @@
 
 namespace WalkerChiu\MorphBoard\Models\Entities;
 
-use WalkerChiu\Core\Models\Entities\Entity;
 use WalkerChiu\Core\Models\Entities\LangTrait;
+use WalkerChiu\Core\Models\Entities\UuidEntity;
 
-class Board extends Entity
+class Board extends UuidEntity
 {
     use LangTrait;
 

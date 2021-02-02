@@ -17,7 +17,7 @@ class BoardFormRequest extends FormRequest
         $request = Request::instance();
         $data = $this->all();
         if ($request->isMethod('put') && empty($data['id']) && isset($request->id)) {
-            $data['id'] = (int) $request->id;
+            $data['id'] = (string) $request->id;
             $this->getInputSource()->replace($data);
         }
 
@@ -53,9 +53,9 @@ class BoardFormRequest extends FormRequest
     {
         $rules = [
             'host_type'      => 'required_with:host_id|string',
-            'host_id'        => 'required_with:host_type|integer|min:1',
+            'host_id'        => 'required_with:host_type|string',
             'type'           => ['required', Rule::in(config('wk-core.class.morph-board.boardType')::getCodes())],
-            'user_id'        => ['required','integer','min:1','exists:'.config('wk-core.table.user').',id'],
+            'user_id'        => ['required','string','exists:'.config('wk-core.table.user').',id'],
             'serial'         => '',
             'identifier'     => 'required|string|max:255',
             'is_highlighted' => 'required|boolean',
@@ -70,9 +70,9 @@ class BoardFormRequest extends FormRequest
 
         $request = Request::instance();
         if ($request->isMethod('put') && isset($request->id)) {
-            $rules = array_merge($rules, ['id' => ['required','integer','min:1','exists:'.config('wk-core.table.morph-board.boards').',id']]);
+            $rules = array_merge($rules, ['id' => ['required','string','exists:'.config('wk-core.table.morph-board.boards').',id']]);
         } elseif ($request->isMethod('post')) {
-            $rules = array_merge($rules, ['id' => ['nullable','integer','min:1','exists:'.config('wk-core.table.morph-board.boards').',id']]);
+            $rules = array_merge($rules, ['id' => ['nullable','string','exists:'.config('wk-core.table.morph-board.boards').',id']]);
         }
 
         return $rules;
@@ -87,19 +87,16 @@ class BoardFormRequest extends FormRequest
     {
         return [
             'id.required'             => trans('php-core::validation.required'),
-            'id.integer'              => trans('php-core::validation.integer'),
-            'id.min'                  => trans('php-core::validation.min'),
+            'id.string'               => trans('php-core::validation.string'),
             'id.exists'               => trans('php-core::validation.exists'),
             'host_type.required_with' => trans('php-core::validation.required_with'),
             'host_type.string'        => trans('php-core::validation.string'),
             'host_id.required_with'   => trans('php-core::validation.required_with'),
-            'host_id.integer'         => trans('php-core::validation.integer'),
-            'host_id.min'             => trans('php-core::validation.min'),
+            'host_id.string'          => trans('php-core::validation.string'),
             'type.required'           => trans('php-core::validation.required'),
             'type.in'                 => trans('php-core::validation.in'),
             'user_id.required'        => trans('php-core::validation.required'),
-            'user_id.integer'         => trans('php-core::validation.integer'),
-            'user_id.min'             => trans('php-core::validation.min'),
+            'user_id.string'          => trans('php-core::validation.string'),
             'user_id.exists'          => trans('php-core::validation.exists'),
             'identifier.required'     => trans('php-core::validation.required'),
             'identifier.max'          => trans('php-core::validation.max'),
