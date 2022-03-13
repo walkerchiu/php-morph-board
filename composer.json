@@ -1,0 +1,44 @@
+{
+    "name": "walkerchiu/php-morph-board",
+    "type": "library",
+    "authors": [
+        {
+            "name":  "Walker Chiu",
+            "email": "chenjen.chiou@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^7.3",
+        "walkerchiu/php-core": "^1.0"
+    },
+    "suggest": {
+        "walkerchiu/php-morph-comment": "^1.0",
+        "walkerchiu/php-morph-image": "^1.0",
+        "walkerchiu/php-morph-link": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "WalkerChiu\\MorphBoard\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WalkerChiu\\MorphBoard\\MorphBoardServiceProvider"
+            ],
+            "aliases": {
+                "Board":                 "WalkerChiu\\MorphBoard\\Models\\Entities\\Board",
+                "BoardWithImage":        "WalkerChiu\\MorphBoard\\Models\\Entities\\BoardWithImage",
+                "BoardWithImageAndLink": "WalkerChiu\\MorphBoard\\Models\\Entities\\BoardWithImageAndLink"
+            }
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    }
+}
